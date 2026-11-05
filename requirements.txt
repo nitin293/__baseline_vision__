@@ -1,0 +1,9 @@
+torch>=2.1
+torchvision>=0.16
+numpy
+pandas
+scikit-learn>=1.2
+matplotlib
+Pillow
+tqdm
+transformers>=4.38   # only needed for dinov2_small / clip_vit_b32
