@@ -1,0 +1,131 @@
+{
+  "global": {
+    "pretrained": true,
+    "optimizer": "adam",
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "lr_scheduler": "exponential",
+    "lr_decay": 0.95,
+    "lr_step": 10,
+    "epochs": 20,
+    "batch_size": 128,
+    "patience": 5,
+    "num_workers": 2,
+    "normalize_embeddings": "standardize",
+    "amp": true,
+    "amp_dtype": "bfloat16"
+  },
+  "downstream": {
+    "fcn": {
+      "enabled": true,
+      "dropout": 0.2,
+      "activation": "relu",
+      "norm": "batch"
+    },
+    "cnn_maxpool": {
+      "enabled": true,
+      "dropout": 0.2,
+      "activation": "relu",
+      "norm": "batch"
+    }
+  },
+  "models": {
+    "resnet18": {
+      "enabled": true,
+      "mode": "both",
+      "embedding_layer": "final",
+      "downstream": [
+        "fcn",
+        "cnn_maxpool"
+      ],
+      "frozen": {
+        "lr": 0.001
+      },
+      "finetune": {
+        "lr": 0.001,
+        "backbone_lr": 0.0001,
+        "batch_size": 64,
+        "epochs": 10,
+        "augment": true
+      }
+    },
+    "resnet50": {
+      "enabled": true,
+      "mode": "frozen",
+      "embedding_layer": "layer3",
+      "downstream": [
+        "fcn",
+        "cnn_maxpool"
+      ]
+    },
+    "vgg16": {
+      "enabled": true,
+      "mode": "frozen",
+      "embedding_layer": "final",
+      "downstream": [
+        "fcn",
+        "cnn_maxpool"
+      ]
+    },
+    "densenet121": {
+      "enabled": true,
+      "mode": "frozen",
+      "embedding_layer": "final",
+      "downstream": [
+        "fcn",
+        "cnn_maxpool"
+      ]
+    },
+    "efficientnet_b0": {
+      "enabled": true,
+      "mode": "frozen",
+      "embedding_layer": "final",
+      "downstream": [
+        "fcn",
+        "cnn_maxpool"
+      ]
+    },
+    "mobilenet_v3_small": {
+      "enabled": true,
+      "mode": "both",
+      "embedding_layer": "final",
+      "downstream": [
+        "fcn",
+        "cnn_maxpool"
+      ],
+      "finetune": {
+        "lr": 0.001,
+        "backbone_lr": 0.0001,
+        "batch_size": 64,
+        "epochs": 10
+      }
+    },
+    "vit_b_16": {
+      "enabled": true,
+      "mode": "frozen",
+      "embedding_layer": "final",
+      "downstream": [
+        "fcn",
+        "cnn_maxpool"
+      ]
+    },
+    "dinov2_small": {
+      "enabled": true,
+      "mode": "frozen",
+      "embedding_layer": "m.encoder.layer.8",
+      "downstream": [
+        "fcn",
+        "cnn_maxpool"
+      ]
+    },
+    "clip_vit_b32": {
+      "enabled": true,
+      "mode": "frozen",
+      "embedding_layer": "final",
+      "downstream": [
+        "fcn",
+        "cnn_maxpool"
+      ]
+    }
+  }
+}
